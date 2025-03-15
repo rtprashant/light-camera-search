@@ -1,8 +1,8 @@
-Light Camera Action
+Light Camera Search 🎬
 
 Overview
 
-Light Camera Action is a React.js movie search application built with Vite and Tailwind CSS. It fetches movie information using the TMDB API and allows users to search for movies, view details, and save favorite movies using local storage.
+Light Camera Search is a React.js movie search application built with Vite and Tailwind CSS. It fetches movie information using the TMDB API and allows users to search for movies, view details, and save favorite movies using local storage.
 
 Setup Instructions
 
@@ -14,7 +14,7 @@ git clone https://github.com/rtprashant/light-camera-search
 
 Navigate to the project directory:
 
-cd light-camera-action
+cd light-camera-search
 
 Install dependencies:
 
@@ -26,7 +26,7 @@ Create a .env file in the root directory.
 
 Add the TMDB API key:
 
-VITE_TMDB_API_KEY=your_api_key_here
+VITE_API_KEY=your_api_key_here
 
 Start the development server:
 
