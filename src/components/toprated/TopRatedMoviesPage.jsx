@@ -74,7 +74,7 @@ function TopRatedMoviesPage() {
                                 {
                                     movies.map((i) => (
                                         <div key={i.id} onClick={() => handleDeatailsClick(i.id)}>
-                                            <MovieBox releaseDate={i.release_date} title={i.title} rating={i.vote_average} image={i.poster_path} className="flex-grow w-full" />
+                                            <MovieBox id={i.id}  releaseDate={i.release_date} title={i.title} rating={i.vote_average} image={i.poster_path} className="flex-grow w-full" />
 
                                         </div>
 

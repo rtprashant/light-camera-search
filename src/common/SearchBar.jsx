@@ -1,6 +1,6 @@
-import React, { lazy, Suspense, useCallback, useState } from 'react'
+import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react'
 import { category, searchBar } from '../constant/landingpage';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { searchMovies } from '../api/fetchapi';
 import { debounce } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,26 +12,37 @@ function SearchBar() {
   const [search, setSearch] = useState('')
   const { searching,
     searchRes,
-    searchErr } = useSelector(state => state.search)
+    searchErr , page } = useSelector(state => state.search)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const handleSearch = useCallback(
     debounce(
-      async (query) => {
+      async (query  ) => {
         dispatch(startSearch())
         if (!query || query.trim() == "") return;
         try {
           console.log(query);
-          const res = await searchMovies(query)
+          const res = await searchMovies(query )
           console.log(res);
           dispatch(searchSuccess(res.results))
         } catch (error) {
-          console.log(error);
+          console.log(error?.
+            response?.data?.
+            status_message
+            );
           dispatch(searchFailed(error.message))
         }
 
-      }, 1000
+      }, 500
     ), []
   )
+
+  // useEffect(()=>{
+  //   if(search){
+  //     handleSearch(search, page)
+  //   }
+   
+  // },[search, page, handleSearch])
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -40,9 +51,17 @@ function SearchBar() {
     handleSearch(e.target.value)
 
   }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    navigate(`/moives-search/${search}`)
+
+  }
   return (
     <div className='w-full flex  flex-col  z-50 justify-center p-4 pt-24 sm:pt-28 md:pt-36'>
-      <form action="" className='w-full flex gap-2 justify-center'>
+      <form action="" 
+      onSubmit={handleSubmit}
+      className='w-full flex gap-2 justify-center'>
         <input type="text"
           placeholder={searchBar.placeHolder}
           onChange={handleChange}

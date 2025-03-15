@@ -1,21 +1,45 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import ErrorPage from './ErrorPage'
 import { category, errorPage, loadingIcon, movieSearch } from '../constant/landingpage'
 import MovieBox from './MovieBox'
 import { useNavigate } from 'react-router-dom'
 import errorImage from '../assets/error.jpg'
+import { incrementPage } from '../redux/features/Searching'
 
 function SearchResult() {
+  
     const { searching,
         searchRes,
-        searchErr } = useSelector(state => state.search)
+        searchErr , page } = useSelector(state => state.search)
         const navigate = useNavigate()
+    const dispatch  = useDispatch()
+    const { loading, error } = useSelector(state => state.api)
 
     const imagePrifix = "https://image.tmdb.org/t/p/w185"
     const handleDeatailsClick = (id) => {
         navigate(`/movie-deatails/${id}`)
     }
+    // useEffect(() => {
+    //         if (!searchErr) {
+    //             const handleScroll = () => {
+    //                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
+    //                     dispatch(incrementPage())
+                        
+    //                 }
+    //             };
+    //             window.addEventListener("scroll", handleScroll);
+    //             return () => window.removeEventListener("scroll", handleScroll);
+    
+    //         }
+    //     }, [ searchErr]);
+    //     useEffect(()=>{
+    //         console.log(page);
+    //         console.log( searchRes?.length);
+            
+            
+    //     },[page])
+        
     return (
         <div>
             <div>
@@ -25,13 +49,14 @@ function SearchResult() {
                         {
                             searchRes.length > 0 ? searchRes.map((i) => (
                                 <div key={i.id} onClick={() => handleDeatailsClick(i.id)}>
-                                    <MovieBox releaseDate={i.release_date} title={i.title} rating={i.vote_average} image={imagePrifix + i.poster_path || errorImage} className="flex-grow w-full" />
+                                    <MovieBox releaseDate={i.release_date} title={i.title} rating={i.vote_average?.toFixed()} image={i.poster_path ? `${imagePrifix}/${i.poster_path}` : errorImage} className="flex-grow w-full" />
 
                                 </div>
 
                             )) : (
                                 <div>
                                     {movieSearch.movieSearchError}
+                                    {searchRes.length}
                                 </div>
                             )
 

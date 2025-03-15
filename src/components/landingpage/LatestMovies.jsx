@@ -84,7 +84,7 @@ function LatestMovies() {
                                 {
                                     movies.map((i) => (
                                         <div key={i.id} onClick={() => handleDeatailsClick(i.id)}>
-                                            <MovieBox releaseDate={i.release_date} title={i.title} rating={i.vote_average} image={i.poster_path} className="flex-grow w-full" />
+                                            <MovieBox releaseDate={i.release_date} id={i.id}  title={i.title} rating={i.vote_average} image={i.poster_path} className="flex-grow w-full" />
 
                                         </div>
 

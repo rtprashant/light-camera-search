@@ -37,8 +37,8 @@ export const category = [
     },
     {   
         id : 4,
-        title : "Upcoming ",
-        url : "/upcoming-movies"
+        title : "Favourites",
+        url : "/favourites-movies"
     },
     
 ]

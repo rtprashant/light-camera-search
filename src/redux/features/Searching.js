@@ -4,6 +4,7 @@ const initialState = {
     searching : false ,
     searchRes : [] ,
     searchErr : null,
+    page : 1,
 }
 const searchSlice = createSlice({
     name:"search",
@@ -21,15 +22,18 @@ const searchSlice = createSlice({
         },
         searchSuccess : (state , action)=>{
             state.searching = false
-            state.searchErr = null,
-            state.searchRes = action.payload
+            state.searchErr = null
+            state.searchRes = [...state.searchRes,...action.payload]
         },
         searchStop : (state)=>{
             state.searchRes = []
+        },
+        incrementPage : (state)=>{
+            state.page = state.page+1;
         }
 
     }
 })
 
-export const {startSearch , searchFailed , searchStop , searchSuccess} = searchSlice.actions
+export const {startSearch , searchFailed , searchStop , searchSuccess , incrementPage} = searchSlice.actions
 export default searchSlice.reducer

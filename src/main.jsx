@@ -11,18 +11,21 @@ import PopularMovies from './components/popular/PopularMovies.jsx'
 import UpcomingMovies from './components/upcoming/UpcomingMovies.jsx'
 import MovieDetails from './components/movieDetails/MovieDetails.jsx'
 import ErrorPage from './common/ErrorPage.jsx'
+import SearchResult from './common/SearchResult.jsx'
+import { SkeletonMovieDetailsmobile } from './common/Skelton.jsx'
+import Favourites from './components/favourites/FavouritesMovies.jsx'
 
 
 const AppRouter = () => {
   const router = createBrowserRouter([
     {
-      path: "",
+      path: "/",
       element: <LandingPage />
 
     },
     {
       path: "/currently-playing-movies",
-      element: <App />
+      element:  <App/>
 
     },
     {
@@ -36,8 +39,8 @@ const AppRouter = () => {
 
     },
     {
-      path: "/upcoming-movies",
-      element: <UpcomingMovies />
+      path: "/favourites-movies",
+      element: <Favourites/>
 
     },
     {
@@ -48,6 +51,10 @@ const AppRouter = () => {
     {
       path : "*",
       element : <ErrorPage/>
+    },
+    {
+      path: "/moives-search/:moviename",
+      element:<SearchResult/>
     }
   ])
   return <RouterProvider router={router} />

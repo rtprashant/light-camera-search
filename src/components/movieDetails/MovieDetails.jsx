@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { movieDetails } from '../../api/fetchapi'
 import { useDispatch, useSelector } from 'react-redux'
-import { SkeletonMovieDetails, Skelton } from '../../common/Skelton'
+import {  SkeletonMovieDetailsLarge, SkeletonMovieDetailsmobile, Skelton } from '../../common/Skelton'
 import { apiFetchError, apiFetchStartReq, apiFetchStop, apiFetchSuccess } from '../../redux/features/ApiFetch'
 import ErrorPage from '../../common/ErrorPage'
+import errorImage from '../../assets/error.jpg'
 
 function MovieDetails() {
     const [movie, setMovie] = useState({})
@@ -37,18 +38,24 @@ function MovieDetails() {
             {
                 loading || error ? (
                     <div className='w-full h-screen flex justify-center items-center'>
-                        <SkeletonMovieDetails  className=""/>
+                        <div className='sm:block hidden w-full h-screen'>
+                        <SkeletonMovieDetailsLarge className=""/>
+                        </div>
+                        <div  className="sm:hidden block w-full h-screen">
+                        <SkeletonMovieDetailsmobile/>
+                        </div>
+                       
                     </div>
                 ) : (
                     <div className='w-full h-screen flex justify-center items-center'>
                         <div className='lg:w-[80%] sm:w-[95%]  md:h-[65%] lg:h-[70%] sm:h-[60%] sm:block hidden absolute rounded-2xl'>
                             <div className=''>
-                                <img src={backDropimagePrifix + movie?.backdrop_path} alt="" className='w-full rounded-2xl sm:block hidden object-cover h-full absolute'
+                                <img src={ movie?.backdrop_path ? backDropimagePrifix + movie?.backdrop_path : errorImage } alt="" className='w-full rounded-2xl sm:block hidden object-cover h-full absolute'
                                 />
                             </div>
                             <div className='absolute w-full h-full z-40 flex items-center'>
                                 <div className='lg:w-[40%] sm:w-[20%]  sm: h-[80%]  text-center justify-center flex items-center'>
-                                    <img src={posterimagePrifix + movie?.poster_path} alt="" className='md:hidden lg:block hidden w-[%] h-[100%] rounded-2xl object-cover  justify-center items-center '
+                                    <img src={movie?.poster_path ?posterimagePrifix + movie?.poster_path : errorImage} alt="" className='md:hidden lg:block hidden w-[%] h-[100%] rounded-2xl object-cover  justify-center items-center '
                                     />
                                 </div>
                                 <div className='lg:w-[60%] md:w-[80%] sm:w-[85%] mt-[130%] sm:ml-10 sm:gap-5 flex-col sm:block hidden realtive overflow-hidden sm:mt-0 h-auto inset-0 '>
