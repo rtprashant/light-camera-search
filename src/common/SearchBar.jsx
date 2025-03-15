@@ -6,6 +6,7 @@ import { debounce } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { SkeletonGrid } from './Skelton';
 import { searchFailed, searchStop, searchSuccess, startSearch } from '../redux/features/Searching';
+import toast from 'react-hot-toast';
 
 const SearchResult = lazy(()=>import('./SearchResult'))
 function SearchBar() {
@@ -26,23 +27,21 @@ function SearchBar() {
           console.log(res);
           dispatch(searchSuccess(res.results))
         } catch (error) {
-          console.log(error?.
-            response?.data?.
-            status_message
-            );
+          console.log(error?.message);
+          toast.error(error.message)
           dispatch(searchFailed(error.message))
         }
 
       }, 500
     ), []
   )
+  const handleClearClick = (e)=>{
+    e.preventDefault()
+    setSearch("");
+    dispatch(searchStop())
+  
+  }
 
-  // useEffect(()=>{
-  //   if(search){
-  //     handleSearch(search, page)
-  //   }
-   
-  // },[search, page, handleSearch])
 
   const handleChange = (e) => {
     e.preventDefault()
@@ -61,13 +60,18 @@ function SearchBar() {
     <div className='w-full flex  flex-col  z-50 justify-center p-4 pt-24 sm:pt-28 md:pt-36'>
       <form action="" 
       onSubmit={handleSubmit}
-      className='w-full flex gap-2 justify-center'>
+      className='w-full flex gap- justify-center'>
         <input type="text"
           placeholder={searchBar.placeHolder}
           onChange={handleChange}
           value={search}
-          className='bg-white w-[80%] h-16 p-5 font-oswald rounded-full ' />
-        <button className='text-amber-600 text-[30px]'>
+          className='bg-white w-[80%] h-16 p-5 font-oswald rounded-l-full outline-none border-none focus:ring-0 focus:border-transparent' />
+          <button 
+          onClick={handleClearClick}
+          className=' flex justify-center items-center text-[20px] hover:cursor-pointer bg-white text-gray-500 rounded-r-full pr-5 '>
+            {searchBar.crossIcon}
+          </button>
+        <button className='text-amber-600 text-[30px] ml-1'>
           {searchBar.searchIcon}
         </button>
       </form>

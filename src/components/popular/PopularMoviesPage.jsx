@@ -6,8 +6,8 @@ import errorImage from '../../assets/error.jpg'
 import { useNavigate } from 'react-router-dom'
 import { apiFetchError, apiFetchStartReq, apiFetchStop, apiFetchSuccess } from '../../redux/features/ApiFetch'
 import { useDispatch, useSelector } from 'react-redux'
-import { SkeletonGrid } from '../../common/Skelton'
 import ErrorPage from '../../common/ErrorPage'
+import toast from 'react-hot-toast'
 
 function PopularMoviesPage() {
     const [movies, setMovies] = useState([])
@@ -16,7 +16,6 @@ function PopularMoviesPage() {
     const { loading, error } = useSelector(state => state.api)
     const dispatch = useDispatch()
     useEffect(() => {
-
         const popularMovie = async () => {
             try {
                 dispatch(apiFetchStartReq())
@@ -30,13 +29,9 @@ function PopularMoviesPage() {
                 }))
                 setMovies((pre) => [...pre, ...movieDetails]);
                 dispatch(apiFetchSuccess(movieDetails))
-
-
             } catch (error) {
                 dispatch(apiFetchError(error.message))
-                console.log(error.message);
-
-
+                toast.error(error.message)
             } finally {
                 dispatch(apiFetchStop())
             }

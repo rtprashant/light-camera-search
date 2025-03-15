@@ -1,4 +1,4 @@
-import React, { useDebugValue, useEffect, useState } from 'react'
+import React, {  useEffect, useState } from 'react'
 import MovieBox from '../../common/MovieBox'
 import { nowPlayingMovies } from '../../api/fetchapi'
 import errorImage from '../../assets/error.jpg'
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { SkeletonGrid } from '../../common/Skelton'
 import ErrorPage from '../../common/ErrorPage'
 import { searchStop } from '../../redux/features/Searching'
+import toast from 'react-hot-toast'
 
 function LatestMovies() {
     const [movies, setMovies] = useState([])
@@ -17,7 +18,6 @@ function LatestMovies() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(() => {
-
         const playingMovies = async () => {
             try {
                 dispatch(searchStop())
@@ -32,13 +32,9 @@ function LatestMovies() {
                 }))
                 setMovies((pre) => [...pre, ...movieDetails]);
                 dispatch(apiFetchSuccess(movieDetails))
-
-
-
             } catch (error) {
                 dispatch(apiFetchError(error.message))
-                console.log(error.message);
-
+                toast.error(error.message)
 
             } finally {
                 dispatch(apiFetchStop())

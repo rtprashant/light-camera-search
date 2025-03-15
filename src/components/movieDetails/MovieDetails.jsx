@@ -6,6 +6,7 @@ import {  SkeletonMovieDetailsLarge, SkeletonMovieDetailsmobile, Skelton } from 
 import { apiFetchError, apiFetchStartReq, apiFetchStop, apiFetchSuccess } from '../../redux/features/ApiFetch'
 import ErrorPage from '../../common/ErrorPage'
 import errorImage from '../../assets/error.jpg'
+import toast from 'react-hot-toast'
 
 function MovieDetails() {
     const [movie, setMovie] = useState({})
@@ -22,7 +23,7 @@ function MovieDetails() {
                 dispatch(apiFetchSuccess())
             } catch (error) {
                 dispatch(apiFetchError(error.message))
-                console.log(error.message);
+                toast.error(error.message)
 
             } finally {
                 dispatch(apiFetchStop())

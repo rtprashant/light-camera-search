@@ -3,6 +3,7 @@ import { IoReorderThree } from "react-icons/io5";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { FaSearch } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"
+import { RxCross1 } from "react-icons/rx";
 export const header ={
     title: 'Light Camera Search',
     icon: <LuTv/>,
@@ -12,7 +13,8 @@ export const header ={
 
 export const searchBar  = {
     placeHolder : "What you want to watch today",
-    searchIcon : <FaSearch/>
+    searchIcon : <FaSearch/>,
+    crossIcon : <RxCross1/>
 }
 
 export const loadingIcon ={

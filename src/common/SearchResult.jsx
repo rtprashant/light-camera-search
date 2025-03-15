@@ -20,25 +20,6 @@ function SearchResult() {
     const handleDeatailsClick = (id) => {
         navigate(`/movie-deatails/${id}`)
     }
-    // useEffect(() => {
-    //         if (!searchErr) {
-    //             const handleScroll = () => {
-    //                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 400) {
-    //                     dispatch(incrementPage())
-                        
-    //                 }
-    //             };
-    //             window.addEventListener("scroll", handleScroll);
-    //             return () => window.removeEventListener("scroll", handleScroll);
-    
-    //         }
-    //     }, [ searchErr]);
-    //     useEffect(()=>{
-    //         console.log(page);
-    //         console.log( searchRes?.length);
-            
-            
-    //     },[page])
         
     return (
         <div>

@@ -8,12 +8,11 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LandingPage from './components/landingpage/LandingPage.jsx'
 import TopRatedMovies from './components/toprated/TopRatedMovies.jsx'
 import PopularMovies from './components/popular/PopularMovies.jsx'
-import UpcomingMovies from './components/upcoming/UpcomingMovies.jsx'
 import MovieDetails from './components/movieDetails/MovieDetails.jsx'
 import ErrorPage from './common/ErrorPage.jsx'
 import SearchResult from './common/SearchResult.jsx'
-import { SkeletonMovieDetailsmobile } from './common/Skelton.jsx'
 import Favourites from './components/favourites/FavouritesMovies.jsx'
+import { Toaster } from 'react-hot-toast'
 
 
 const AppRouter = () => {
@@ -25,7 +24,7 @@ const AppRouter = () => {
     },
     {
       path: "/currently-playing-movies",
-      element:  <App/>
+      element:  <LandingPage />
 
     },
     {
@@ -63,6 +62,7 @@ createRoot(document.getElementById('root')).render(
 
   <Provider store={store} >
     <AppRouter />
+    <Toaster />
   </Provider>
 
 )

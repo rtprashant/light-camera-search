@@ -13,14 +13,12 @@ function FavouritesMoviesPage() {
   useEffect(() => {
     const favMovies = () => {
       const storedMovies  = localStorage.getItem("favMovies")
-      const parsedMovies = storedMovies ? JSON.parse(storedMovies) : [];
-      console.log(parsedMovies);
-      
+      const parsedMovies = storedMovies ? JSON.parse(storedMovies) : []; 
       setMovies(parsedMovies)
 
     }
     favMovies()
-  }, [movies])
+  }, [localStorage.getItem("favMovies")])
   useEffect(()=>{
     console.log(movies);
     
