@@ -69,30 +69,15 @@ Routes Configuration
 
 The application includes the following routes:
 
-{
-  path: "/", element: <LandingPage />
-},
-{
-  path: "/currently-playing-movies", element: <LandingPage />
-},
-{
-  path: "/popular-movies", element: <PopularMovies />
-},
-{
-  path: "/top-rated-movies", element: <TopRatedMovies />
-},
-{
-  path: "/favourites-movies", element: <Favourites />
-},
-{
-  path: "/movie-details/:id", element: <MovieDetails />
-},
-{
-  path: "*", element: <ErrorPage />
-},
-{
-  path: "/movies-search/:moviename", element: <SearchResult />
-}
+
+"/",
+"/movies-search/:moviename",
+"/currently-playing-movies",
+"/popular-movies",
+"/top-rated-movies",
+"/favourites-movies",
+"/movie-details/:id"  
+
 
 Future Improvements
 
